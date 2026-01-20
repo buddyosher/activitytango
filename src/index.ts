@@ -1,12 +1,11 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import { testConnection } from './config/database';
-
 import familyRoutes from './routes/family';
 import choreRoutes from './routes/chores';
-
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -55,8 +54,9 @@ const startServer = async () => {
       console.error('Failed to connect to database. Exiting...');
       process.exit(1);
     }
-
-    app.listen(PORT, () => {
+    
+    // CRITICAL: Must bind to '0.0.0.0' for Railway!
+    app.listen(PORT, '0.0.0.0', () => {
       console.log('');
       console.log('═══════════════════════════════════════════════');
       console.log('🚀 ActivityTANGO Backend Server');
