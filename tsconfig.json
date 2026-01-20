@@ -10,8 +10,54 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "types": ["node"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }
+```
+
+5. Scroll down, add commit message: "Fix tsconfig for Node.js"
+6. Click **"Commit changes"**
+
+---
+
+## **Key Changes:**
+
+✅ Added `"types": ["node"]` - This tells TypeScript to include Node.js types (including `console`)  
+✅ Changed `"lib": ["ES2020"]` - Removed DOM library (not needed for backend)
+
+---
+
+## **Step 2: Render Will Auto-Redeploy**
+
+1. Go back to your Render dashboard
+2. Render automatically detects the GitHub change
+3. It will **automatically redeploy** (takes 2-3 minutes)
+4. Watch the logs for progress
+
+---
+
+## **If It Doesn't Auto-Deploy:**
+
+1. In Render dashboard, click your service
+2. Click **"Manual Deploy"** → **"Deploy latest commit"**
+
+---
+
+## **Step 3: Monitor the Build**
+
+Watch the logs in Render. You should see:
+```
+==> Building...
+npm install
+npm run build
+> tsc
+Build successful!
+
+==> Starting...
+npm start
+✓ Connected to SkySQL MariaDB successfully
+🚀 ActivityTANGO Backend Server
+📡 Server running on port 8080
