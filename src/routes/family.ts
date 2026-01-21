@@ -3,6 +3,6 @@ import { getFamilyDashboard } from '../controllers/familyController';
 
 const router = Router();
 
-router.get('/dashboard', getFamilyDashboard);
+router.get('/dashboard/:householdId', getFamilyDashboard);
 
 export default router;
