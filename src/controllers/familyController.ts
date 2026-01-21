@@ -15,7 +15,8 @@ interface Chore extends RowDataPacket {
   title: string;
   description: string;
   price: number;
-  status: string;
+  type: string;
+  recurrence: string;
   claimed_by: number | null;
   claimed_by_name: string | null;
 }
@@ -35,9 +36,9 @@ export const getFamilyDashboard = async (req: Request, res: Response): Promise<v
       [householdId]
     );
 
-    // Get available chores (using 'price' instead of 'credits')
+    // Get active chores (removed status column)
     const [chores] = await pool.query<Chore[]>(
-      `SELECT ch.id, ch.title, ch.description, ch.price, ch.status,
+      `SELECT ch.id, ch.title, ch.description, ch.price, ch.type, ch.recurrence,
               ch.assigned_to_child_id as claimed_by, c.name as claimed_by_name
        FROM chores ch
        LEFT JOIN children c ON ch.assigned_to_child_id = c.id
